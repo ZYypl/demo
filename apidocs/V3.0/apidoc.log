@@ -1,0 +1,12 @@
+六月 16, 2020 10:47:17 上午 io.github.yedaxia.apidocs.LogUtils info
+信息: info: find java src paths:  [C:\Users\11780\Downloads\demo\.mvn\wrapper/]
+六月 16, 2020 10:47:17 上午 io.github.yedaxia.apidocs.LogUtils info
+信息: info: project type not set, try to figure out...
+六月 16, 2020 10:47:17 上午 io.github.yedaxia.apidocs.LogUtils info
+信息: info: found it a GENERIC project, tell us if we are wrong.
+六月 16, 2020 10:47:17 上午 io.github.yedaxia.apidocs.LogUtils info
+信息: info: start find controllers in path : C:\Users\11780\Downloads\demo\.mvn\wrapper/
+六月 16, 2020 10:47:17 上午 io.github.yedaxia.apidocs.LogUtils info
+信息: info: generate api docs start...
+六月 16, 2020 10:47:17 上午 io.github.yedaxia.apidocs.LogUtils info
+信息: info: generate api docs done !!!

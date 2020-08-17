@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.20.10.11:3306/demo_sxd?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: root
+
+  redis:
+    host: 172.20.10.11
+    port: 6379
+
+    # database: 0
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   # sql打印到控制台
+  mapper-locations: classpath:mapper/*Mapper.xml
