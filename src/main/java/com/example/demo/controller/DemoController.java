@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
+import com.example.demo.annotation.OperLog;
 import com.example.demo.comment.ApiResult;
+import com.example.demo.constant.OperLogConstant;
 import com.example.demo.entity.People;
 import com.example.demo.service.PeopleService;
 import org.slf4j.Logger;
@@ -31,6 +33,7 @@ public class DemoController {
      * @param id 用户id
      */
     @GetMapping("/{id}")
+    @OperLog(operModul = "用户管理",operType = OperLogConstant.OPER_SELECT,operDesc = "通过用户id查询用户")
     public ApiResult testDemo(@PathVariable Integer id) {
 
         if(StringUtils.isEmpty(id)){
@@ -47,6 +50,7 @@ public class DemoController {
     }
 
     @GetMapping("findAll")
+    @OperLog(operModul = "用户管理",operType = OperLogConstant.OPER_SELECT,operDesc = "查询所有用户")
     public ApiResult findAll() {
         List<People> allPeople =null;
         try {
@@ -61,6 +65,7 @@ public class DemoController {
 
 
     @PostMapping("/modify")
+    @OperLog(operModul = "用户管理",operType = OperLogConstant.OPER_UPDATE,operDesc = "修改用户信息")
     public ApiResult modifyPeople(@RequestBody People p) {
         int i=0;
         try {
@@ -74,6 +79,7 @@ public class DemoController {
 
 
     @PostMapping("/insert")
+    @OperLog(operModul = "用户管理",operType = OperLogConstant.OPER_ADD,operDesc = "新增用户")
     public ApiResult insertPeople(@RequestBody People p) {
         int i=0;
         try {
@@ -92,6 +98,16 @@ public class DemoController {
      *japidocs 不好使
      */
 
+
+//    @GetMapping("/hbase/selectAllTable")
+//    public ApiResult selectAllTable() {
+//
+//
+//        List<String> strings = HbaseUtil.selectAllTables();
+//
+//
+//        return new ApiResult(true ,strings, "SUCCESS");
+//    }
 
 
 }

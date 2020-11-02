@@ -6,6 +6,7 @@ import com.example.demo.service.PeopleService;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.concurrent.TimeUnit;
  */
 
 @Service
+@Transactional
 public class PeopleServiceImpl implements PeopleService {
 
     @Resource
@@ -30,7 +32,9 @@ public class PeopleServiceImpl implements PeopleService {
     @Override
     public People selectById(Integer id) throws Exception{
 
+        //redis
         ValueOperations<String, People> operations = redisTemplate.opsForValue();
+         //redisTemplate.opsForHash().p
         String key ="people_" + id;
         Boolean aBoolean = redisTemplate.hasKey(key);
          if(aBoolean){
@@ -51,6 +55,7 @@ public class PeopleServiceImpl implements PeopleService {
         return peopleMapper.findAllPeople();
     }
 
+    //cache design
     @Override
     public int updatePeopleById(People people) throws Exception {
         String key = "people_" + people.getId();
