@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
+import org.springframework.boot.autoconfigure.data.redis.RedisReactiveAutoConfiguration;
 import tk.mybatis.spring.annotation.MapperScan;
 /*import org.mybatis.spring.annotation.MapperScan;
 
@@ -11,8 +13,9 @@ import tk.mybatis.spring.annotation.MapperScan;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
+//去除autoredisconfig的配置
+//@EnableAutoConfiguration(exclude = {RedisAutoConfiguration.class, RedisReactiveAutoConfiguration.class})
+@SpringBootApplication(exclude = {RedisAutoConfiguration.class, RedisReactiveAutoConfiguration.class})
 @MapperScan("com.example.demo.mapper")
 public class DemoApplication {
 

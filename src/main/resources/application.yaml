@@ -6,10 +6,14 @@ spring:
     password: root
 
   redis:
-    host: 172.20.10.11
-    port: 6379
-
-    # database: 0
+    lone:
+      host: 172.20.10.11
+      port: 6379
+      password: root
+  # database: 0
+    cluster:
+      nodes: 172.20.10.11:7001,172.20.10.11:7003,172.20.10.11:7004,172.20.10.11:7005
+      password: root
 
 
 hbase:

@@ -25,15 +25,21 @@ public class PeopleServiceImpl implements PeopleService {
 
     @Resource
     private PeopleMapper peopleMapper;
-    @Resource
+
+    @Resource(name = "redisTemplate")
     private RedisTemplate redisTemplate;
 
+//    @Resource(name = "clusterRedisTemplate")
+//    private RedisTemplate clusterRedisTemplate;
 
     @Override
     public People selectById(Integer id) throws Exception{
 
         //redis
         ValueOperations<String, People> operations = redisTemplate.opsForValue();
+
+        //redisTemplate.opsForHash().putAll(ley,Map);
+
          //redisTemplate.opsForHash().p
         String key ="people_" + id;
         Boolean aBoolean = redisTemplate.hasKey(key);
