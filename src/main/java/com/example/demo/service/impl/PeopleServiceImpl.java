@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.entity.People;
 import com.example.demo.mapper.PeopleMapper;
 import com.example.demo.service.PeopleService;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,11 @@ public class PeopleServiceImpl implements PeopleService {
     @Resource
     private PeopleMapper peopleMapper;
 
-    @Resource(name = "redisTemplate")
-    private RedisTemplate redisTemplate;
+    @Resource(name = "loneRedisTemplate")
+    private RedisTemplate loneRedisTemplate;
+
+//    @Resource
+//    private S@@@22 dmfmmmmcmcqlSessionTemplate sqlSessionTemplate;
 
 //    @Resource(name = "clusterRedisTemplate")
 //    private RedisTemplate clusterRedisTemplate;
@@ -36,16 +40,17 @@ public class PeopleServiceImpl implements PeopleService {
     public People selectById(Integer id) throws Exception{
 
         //redis
-        ValueOperations<String, People> operations = redisTemplate.opsForValue();
+        ValueOperations<String, People> operations = loneRedisTemplate.opsForValue();
 
         //redisTemplate.opsForHash().putAll(ley,Map);
 
          //redisTemplate.opsForHash().p
         String key ="people_" + id;
-        Boolean aBoolean = redisTemplate.hasKey(key);
+        Boolean aBoolean = loneRedisTemplate.hasKey(key);
          if(aBoolean){
              return operations.get(key);
          }
+//         sqlSessionTemplate.getSqlSessionFactory().openSession();
         People people = peopleMapper.selectByPrimaryKey(id);
         operations.set(key, people);
         return people;
@@ -65,9 +70,9 @@ public class PeopleServiceImpl implements PeopleService {
     @Override
     public int updatePeopleById(People people) throws Exception {
         String key = "people_" + people.getId();
-        if (redisTemplate.hasKey(key)) {
+        if (loneRedisTemplate.hasKey(key)) {
             //失效
-            redisTemplate.expire(key,5, TimeUnit.SECONDS);
+            loneRedisTemplate.expire(key,5, TimeUnit.SECONDS);
         }
 
         return peopleMapper.updateByPrimaryKey(people);

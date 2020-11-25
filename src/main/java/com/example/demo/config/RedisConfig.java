@@ -33,19 +33,19 @@ public class RedisConfig {
     public Integer lonePort;
     @Value("${spring.redis.lone.host}")
     public String loneHost;
-    @Value("${spring.redis.lone.password}")
-    public String lonePassword;
+//    @Value("${spring.redis.lone.password}")
+//    public String lonePassword;
 
-    @Value("${spring.redis.cluster.nodes}")
-    public String clusterNodes;
-    @Value("${spring.redis.cluster.password}")
-    public String clusterPassword;
+//    @Value("${spring.redis.cluster.nodes}")
+//    public String clusterNodes;
+//    @Value("${spring.redis.cluster.password}")
+//    public String clusterPassword;
 
 
     /**
      * 单一数据源
      */
-
+//
 //    @Bean
 //    @SuppressWarnings("all")
 //    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
@@ -96,45 +96,45 @@ public class RedisConfig {
         standaloneConfiguration.setDatabase(0);
         //端口
         standaloneConfiguration.setPort(lonePort);
-        standaloneConfiguration.setPassword(RedisPassword.of(lonePassword));
+//        standaloneConfiguration.setPassword(RedisPassword.of(lonePassword));
         return new LettuceConnectionFactory(standaloneConfiguration);
     }
-
-    /**
-     *
-     * 集群版的配置
-     * @return
-     */
-    @Bean("clusterRedisFactory")
-    public LettuceConnectionFactory clusterRedisFactory() {
-        //cluster config
-        RedisClusterConfiguration clusterConfiguration = new RedisClusterConfiguration();
-        String[] split = clusterNodes.split(",");
-        //nodes节点
-        Set<RedisNode> redisNodes =new HashSet<>();
-        for (int i = 0; i < split.length; i++) {
-            redisNodes.add(new RedisNode(split[i].split(":")[0],Integer.valueOf(split[i].split(":")[1])));
-        }
-        //设置集群节点
-        clusterConfiguration.setClusterNodes(redisNodes);
-        //设置密码
-        clusterConfiguration.setPassword(RedisPassword.of(clusterPassword));
-        return new LettuceConnectionFactory(clusterConfiguration);
-    }
-
-    /**
-     * clusterRedisTemplate
-     * @return
-     */
-    @Bean("clusterRedisTemplate")
-    public RedisTemplate<String, Object> clusterRedisTemplate() {
-        RedisTemplate<String, Object> template = new RedisTemplate<>();
-        //设置连接factory
-        template.setConnectionFactory(clusterRedisFactory());
-        return template;
-    }
-
-
+//
+//    /**
+//     *
+//     * 集群版的配置
+//     * @return
+//     */
+//    @Bean("clusterRedisFactory")
+//    public LettuceConnectionFactory clusterRedisFactory() {
+//        //cluster config
+//        RedisClusterConfiguration clusterConfiguration = new RedisClusterConfiguration();
+//        String[] split = clusterNodes.split(",");
+//        //nodes节点
+//        Set<RedisNode> redisNodes =new HashSet<>();
+//        for (int i = 0; i < split.length; i++) {
+//            redisNodes.add(new RedisNode(split[i].split(":")[0],Integer.valueOf(split[i].split(":")[1])));
+//        }
+//        //设置集群节点
+//        clusterConfiguration.setClusterNodes(redisNodes);
+//        //设置密码
+//        clusterConfiguration.setPassword(RedisPassword.of(clusterPassword));
+//        return new LettuceConnectionFactory(clusterConfiguration);
+//    }
+//
+//    /**
+//     * clusterRedisTemplate
+//     * @return
+//     */
+//    @Bean("clusterRedisTemplate")
+//    public RedisTemplate<String, Object> clusterRedisTemplate() {
+//        RedisTemplate<String, Object> template = new RedisTemplate<>();
+//        //设置连接factory
+//        template.setConnectionFactory(clusterRedisFactory());
+//        return template;
+//    }
+//
+//
     /**
      * loneRedisTemplate
      * @return
@@ -146,8 +146,8 @@ public class RedisConfig {
         template.setConnectionFactory(loneRedisFactory());
         return template;
     }
-
-    //需要设置默认的？？
+//
+//    //需要设置默认的？？
     @Bean("redisTemplate")
     public RedisTemplate<String, Object> redisTemplate() {
         RedisTemplate<String, Object> template = new RedisTemplate<>();

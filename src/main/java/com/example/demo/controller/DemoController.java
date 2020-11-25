@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import tk.mybatis.mapper.util.Assert;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -35,6 +36,9 @@ public class DemoController {
     @GetMapping("/{id}")
     @OperLog(operModul = "用户管理",operType = OperLogConstant.OPER_SELECT,operDesc = "通过用户id查询用户")
     public ApiResult testDemo(@PathVariable Integer id) {
+        //采用assert断言判断是否为空
+        //Assert
+       // Assert.notNull(id,"id爲空");
 
         if(StringUtils.isEmpty(id)){
             return new ApiResult(false, "id为空");
